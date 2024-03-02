@@ -1,0 +1,5 @@
+graph/
+projects/*
+
+!projects/graph.vcxproj
+!projects/graph.vcxproj.filters
