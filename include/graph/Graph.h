@@ -17,9 +17,11 @@ public:
 	void AddEdge(size_t f_node, size_t t_node);
 
 	auto& GetNodes() const { return m_nodes; }
+	auto& GetEdges() const { return m_edges; }
 
 private:
 	std::vector<std::shared_ptr<Node>> m_nodes;
+	std::vector<std::pair<int, int>> m_edges;
 
 }; // Graph
 

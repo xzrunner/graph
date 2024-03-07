@@ -14,7 +14,8 @@ void Graph::AddEdge(size_t f_node, size_t t_node)
 {
 	if (f_node < m_nodes.size() && t_node < m_nodes.size()) 
 	{
-		m_nodes[f_node]->AddConnect(m_nodes[t_node]);
+		m_edges.push_back({ f_node, t_node });
+		m_nodes[f_node]->AddConnect(m_nodes[t_node ]);
 	}
 }
 
