@@ -4,21 +4,8 @@
 
 #include <SM_Calc.h>
 
-#include <random>
-
 namespace graph
 {
-
-void GraphTools::Layout(const Graph& graph)
-{
-	auto& nodes = graph.GetNodes();
-	for (auto& node : nodes)
-	{
-		float x = static_cast<float>(rand()) / RAND_MAX;
-		float y = static_cast<float>(rand()) / RAND_MAX;
-		node->SetPos({ x, y });
-	}
-}
 
 std::shared_ptr<Node> GraphTools::QueryNode(const Graph& graph, const sm::vec2& pos)
 {

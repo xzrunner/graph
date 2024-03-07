@@ -21,11 +21,13 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\include\graph\Edge.h" />
     <ClInclude Include="..\..\..\include\graph\Graph.h" />
+    <ClInclude Include="..\..\..\include\graph\GraphLayout.h" />
     <ClInclude Include="..\..\..\include\graph\GraphTools.h" />
     <ClInclude Include="..\..\..\include\graph\Node.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\Graph.cpp" />
+    <ClCompile Include="..\..\..\source\GraphLayout.cpp" />
     <ClCompile Include="..\..\..\source\GraphTools.cpp" />
     <ClCompile Include="..\..\..\source\Node.cpp" />
   </ItemGroup>
@@ -111,7 +113,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\sm</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\sm;..\..\..\..\ogdf\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
@@ -120,7 +122,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\sm</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\sm;..\..\..\..\ogdf\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;NO_BOOST</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>

@@ -12,6 +12,7 @@ class Node
 {
 public:
 	Node() {}
+	Node(int id) : m_id(id) {}
 
 	void SetId(int id) { m_id = id; }
 	int GetId() const { return m_id; }
