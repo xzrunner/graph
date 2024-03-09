@@ -46,7 +46,7 @@ void end(const graph::Graph& graph, const ogdf::Graph& G, const ogdf::GraphAttri
 	for (ogdf::node v : ogdf_nodes)
 	{
 		float x = GA.x(v) / 1024 + 0.5;
-		float y = GA.y(v) / 1024 + 0.5;
+		float y = 0.5 - GA.y(v) / 1024;
 		nodes[v->index()]->SetPos({ x, y });
 	}
 }
@@ -143,6 +143,37 @@ void GraphLayout::OptimalHierarchy(const Graph& graph)
 	SL.setLayout(ohl);
 
 	SL.call(GA);
+
+	end(graph, G, GA);
+}
+
+void GraphLayout::HierarchyRanking(const Graph& graph)
+{
+	ogdf::Graph G;
+	ogdf::GraphAttributes GA(G);
+
+	begin(graph, G, GA);
+	
+	auto& nodes = graph.GetNodes();
+	ogdf::NodeArray<int> rank(G);
+	//for (int i = 0; i < nodes.size(); ++i) {
+	//	rank[i] = nodes[i]->GetRank();
+	//}
+	int i = 0;
+	for (ogdf::node v : G.nodes)
+		rank[v] = nodes[i++]->GetRank();
+
+	ogdf::SugiyamaLayout SL;
+	SL.setRanking(new ogdf::OptimalRanking);
+	SL.setCrossMin(new ogdf::MedianHeuristic);
+
+	ogdf::OptimalHierarchyLayout* ohl = new ogdf::OptimalHierarchyLayout;
+	ohl->layerDistance(30.0);
+	ohl->nodeDistance(25.0);
+	ohl->weightBalancing(0.7);
+	SL.setLayout(ohl);
+
+	SL.call(GA, rank);
 
 	end(graph, G, GA);
 }

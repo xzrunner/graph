@@ -17,6 +17,9 @@ public:
 	void SetId(int id) { m_id = id; }
 	int GetId() const { return m_id; }
 
+	void SetRank(int rank) { m_rank = rank; }
+	int GetRank() const { return m_rank; }
+
 	void AddConnect(const std::shared_ptr<Node>& conn);
 	auto& GetConnects() const { return m_conns; }
 
@@ -25,6 +28,7 @@ public:
 
 private:
 	int m_id = 0;
+	int m_rank = 0;
 
 	std::vector<std::shared_ptr<Node>> m_conns;
 

@@ -15,6 +15,7 @@ public:
 	static void Multilevel(const Graph& graph);
 
 	static void OptimalHierarchy(const Graph& graph);
+	static void HierarchyRanking(const Graph& graph);
 
 }; // GraphLayout
 
