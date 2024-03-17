@@ -1,6 +1,7 @@
 #include "graph/GraphLayout.h"
 #include "graph/Graph.h"
 #include "graph/Node.h"
+#include "graph/NodeRank.h"
 
 #include <ogdf/basic/GraphAttributes.h>
 #include <ogdf/energybased/StressMinimization.h>
@@ -161,7 +162,9 @@ void GraphLayout::HierarchyRanking(const Graph& graph)
 	//}
 	int i = 0;
 	for (ogdf::node v : G.nodes)
-		rank[v] = nodes[i++]->GetRank();
+	{
+		rank[v] = nodes[i++]->GetComponent<NodeRank>().GetRank();
+	}
 
 	ogdf::SugiyamaLayout SL;
 	SL.setRanking(new ogdf::OptimalRanking);

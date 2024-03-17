@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\Graph.cpp">
+      <Filter>obj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\Node.cpp">
+      <Filter>obj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\GraphLayout.cpp">
+      <Filter>tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\GraphTools.cpp">
+      <Filter>tools</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\graph\Edge.h">
+      <Filter>obj</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\graph\Graph.h">
+      <Filter>obj</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\graph\Node.h">
+      <Filter>obj</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\graph\GraphLayout.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\graph\GraphTools.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\graph\NodeRank.h">
+      <Filter>comp</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="obj">
+      <UniqueIdentifier>{952012e3-bfa1-4574-bcb9-142713f5785e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="comp">
+      <UniqueIdentifier>{7223ec0c-7016-43a1-8079-2f7432532bcc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tools">
+      <UniqueIdentifier>{9e7126a6-61d0-4c5c-9ea3-445bbb00c365}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

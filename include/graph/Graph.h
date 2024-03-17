@@ -1,5 +1,7 @@
 #pragma once
 
+#include <objcomp/Object.h>
+
 #include <vector>
 #include <memory>
 
@@ -8,7 +10,7 @@ namespace graph
 
 class Node;
 
-class Graph
+class Graph : public objcomp::Object
 {
 public:
 	Graph() {}
