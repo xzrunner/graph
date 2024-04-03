@@ -28,8 +28,8 @@ void begin(const graph::Graph& graph, ogdf::Graph& G, ogdf::GraphAttributes& GA)
 		auto& pos = nodes[i]->GetPos();
 		auto v = G.newNode(i);
 		o_nodes.push_back(v);
-		GA.x(v) = (pos.x - 0.5) * 1024;
-		GA.y(v) = (pos.y - 0.5) * 1024;
+		GA.x(v) = pos.x * 1024;
+		GA.y(v) = pos.y * 1024;
 	}
 
 	auto& edges = graph.GetEdges();
@@ -46,8 +46,8 @@ void end(const graph::Graph& graph, const ogdf::Graph& G, const ogdf::GraphAttri
 	auto& nodes = graph.GetNodes();
 	for (ogdf::node v : ogdf_nodes)
 	{
-		float x = GA.x(v) / 1024 + 0.5;
-		float y = 0.5 - GA.y(v) / 1024;
+		float x = GA.x(v) / 1024;
+		float y = 1.0 - GA.y(v) / 1024;
 		nodes[v->index()]->SetPos({ x, y });
 	}
 }
