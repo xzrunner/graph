@@ -3,6 +3,7 @@
 #include <objcomp/Object.h>
 
 #include <vector>
+#include <map>
 #include <memory>
 
 namespace graph
@@ -21,9 +22,14 @@ public:
 	auto& GetNodes() const { return m_nodes; }
 	auto& GetEdges() const { return m_edges; }
 
+	void SetDirected(bool d) { m_directed = d; }
+	bool IsDirected() const { return m_directed; }
+
 private:
 	std::vector<std::shared_ptr<Node>> m_nodes;
-	std::vector<std::pair<int, int>> m_edges;
+	std::multimap<size_t, size_t> m_edges;
+
+	bool m_directed = true;
 
 }; // Graph
 
