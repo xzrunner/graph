@@ -22,6 +22,8 @@ public:
 	auto& GetNodes() const { return m_nodes; }
 	auto& GetEdges() const { return m_edges; }
 
+	void ClearEdges(size_t node);
+
 	void SetDirected(bool d) { m_directed = d; }
 	bool IsDirected() const { return m_directed; }
 

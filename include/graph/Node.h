@@ -19,6 +19,7 @@ public:
 	int GetId() const { return m_id; }
 
 	void AddConnect(const std::shared_ptr<Node>& conn);
+	void DelConnect(const std::shared_ptr<Node>& conn);
 	auto& GetConnects() const { return m_conns; }
 
 	auto& GetPos() const { return m_pos; }

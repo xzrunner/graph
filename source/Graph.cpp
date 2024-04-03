@@ -31,4 +31,18 @@ void Graph::AddEdge(size_t f_node, size_t t_node)
 	m_nodes[n1]->AddConnect(m_nodes[n0]);
 }
 
+void Graph::ClearEdges(size_t node)
+{
+	assert(node < m_nodes.size());
+
+	auto region = m_edges.equal_range(node);
+	for (auto itr = region.first; itr != region.second; ) 
+	{
+		m_nodes[itr->first]->DelConnect(m_nodes[itr->second]);
+		m_nodes[itr->second]->DelConnect(m_nodes[itr->first]);
+
+		itr = m_edges.erase(itr);
+	}
+}
+
 }
