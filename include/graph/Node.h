@@ -13,10 +13,12 @@ class Node : public objcomp::Object
 {
 public:
 	Node() {}
-	Node(int id) : m_id(id) {}
 
-	void SetId(int id) { m_id = id; }
-	int GetId() const { return m_id; }
+	void SetName(const std::string& name) { m_name = name; }
+	auto& GetName() const { return m_name; }
+
+	void SetValue(int val) { m_value = val; }
+	int GetValue() const { return m_value; }
 
 	void AddConnect(const std::shared_ptr<Node>& conn);
 	void DelConnect(const std::shared_ptr<Node>& conn);
@@ -26,7 +28,8 @@ public:
 	void SetPos(const sm::vec2& pos) { m_pos = pos; }
 
 private:
-	int m_id = 0;
+	std::string m_name;
+	int m_value = -1;
 
 	std::vector<std::shared_ptr<Node>> m_conns;
 
