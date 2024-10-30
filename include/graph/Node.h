@@ -1,6 +1,5 @@
 #pragma once
 
-#include <SM_Vector.h>
 #include <objcomp/Object.h>
 
 #include <memory>
@@ -24,16 +23,11 @@ public:
 	void DelConnect(const std::shared_ptr<Node>& conn);
 	auto& GetConnects() const { return m_conns; }
 
-	auto& GetPos() const { return m_pos; }
-	void SetPos(const sm::vec2& pos) { m_pos = pos; }
-
 private:
 	std::string m_name;
 	int m_value = -1;
 
 	std::vector<std::shared_ptr<Node>> m_conns;
-
-	sm::vec2 m_pos;
 
 }; // Node
 

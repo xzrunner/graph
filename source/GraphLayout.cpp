@@ -2,6 +2,7 @@
 #include "graph/Graph.h"
 #include "graph/Node.h"
 #include "graph/NodeRank.h"
+#include "graph/NodePos.h"
 
 #include <ogdf/basic/GraphAttributes.h>
 #include <ogdf/basic/Logger.h>
@@ -28,7 +29,11 @@ void begin(const graph::Graph& graph, ogdf::Graph& G, ogdf::GraphAttributes& GA)
 	{
 		if (nodes[i]) 
 		{
-			auto& pos = nodes[i]->GetPos();
+			if (!nodes[i]->HasComponent<graph::NodePos>())
+			{
+				nodes[i]->AddComponent<graph::NodePos>(sm::vec2(0, 0));
+			}
+			auto& pos = nodes[i]->GetComponent<graph::NodePos>().GetPos();
 			auto v = G.newNode(i);
 			o_nodes.push_back(v);
 			GA.x(v) = pos.x * 1024;
@@ -61,7 +66,7 @@ void end(const graph::Graph& graph, const ogdf::Graph& G, const ogdf::GraphAttri
 
 		float x = GA.x(v) / 1024;
 		float y = 1.0 - GA.y(v) / 1024;
-		nodes[v->index()]->SetPos({ x, y });
+		nodes[v->index()]->GetComponent<graph::NodePos>().SetPos({ x, y });
 	}
 }
 

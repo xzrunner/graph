@@ -33,6 +33,12 @@
     <ClInclude Include="..\..\..\include\graph\NodeRank.h">
       <Filter>comp</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\graph\NodePos.h">
+      <Filter>comp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\graph\NodeColor.h">
+      <Filter>comp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="obj">

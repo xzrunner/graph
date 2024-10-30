@@ -2,6 +2,8 @@
 #include "graph/Node.h"
 #include "graph/Edge.h"
 
+#include <assert.h>
+
 namespace graph
 {
 
