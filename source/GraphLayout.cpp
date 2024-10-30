@@ -4,6 +4,7 @@
 #include "graph/NodeRank.h"
 
 #include <ogdf/basic/GraphAttributes.h>
+#include <ogdf/basic/Logger.h>
 #include <ogdf/energybased/StressMinimization.h>
 #include <ogdf/energybased/FMMMLayout.h>
 #include <ogdf/energybased/MultilevelLayout.h>
@@ -140,6 +141,8 @@ void GraphLayout::Multilevel(const Graph& graph)
 
 void GraphLayout::OptimalHierarchy(const Graph& graph)
 {
+	ogdf::Logger::globalLogLevel(ogdf::Logger::Level::Minor);
+
 	ogdf::Graph G;
 	ogdf::GraphAttributes GA(G);
 
