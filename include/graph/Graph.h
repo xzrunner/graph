@@ -22,6 +22,8 @@ public:
 	auto& GetNodes() const { return m_nodes; }
 	auto& GetEdges() const { return m_edges; }
 
+	void RemoveNode(size_t node);
+
 	void RemoveEdge(size_t f_node, size_t t_node);
 	void ClearEdges(size_t node);
 

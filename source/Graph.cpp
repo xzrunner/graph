@@ -31,6 +31,13 @@ void Graph::AddEdge(size_t f_node, size_t t_node)
 	m_nodes[n1]->AddConnect(m_nodes[n0]);
 }
 
+void Graph::RemoveNode(size_t node)
+{
+	assert(node < m_nodes.size());
+
+	m_nodes[node] = nullptr;
+}
+
 void Graph::RemoveEdge(size_t f_node, size_t t_node)
 {
 	assert(f_node < m_nodes.size() && t_node < m_nodes.size());
