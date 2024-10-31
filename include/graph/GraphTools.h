@@ -13,7 +13,7 @@ class Node;
 class GraphTools
 {
 public:
-	static std::shared_ptr<Node> QueryNode(const Graph& graph, const sm::vec2& pos);
+	static const std::shared_ptr<Node> QueryNode(const Graph& graph, const sm::vec2& pos);
 
 }; // GraphTools
 

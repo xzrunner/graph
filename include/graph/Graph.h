@@ -19,8 +19,10 @@ public:
 	void AddNode(const std::shared_ptr<Node>& node);
 	void AddEdge(size_t f_node, size_t t_node);
 
-	auto& GetNodes() const { return m_nodes; }
 	auto& GetEdges() const { return m_edges; }
+
+	size_t GetNodesNum() const { return m_nodes.size(); }
+	const std::shared_ptr<Node> GetNode(size_t node) const;
 
 	void RemoveNode(size_t node);
 

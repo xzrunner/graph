@@ -24,16 +24,15 @@ void begin(const graph::Graph& graph, ogdf::Graph& G, ogdf::GraphAttributes& GA)
 {
 	std::vector<ogdf::node> o_nodes;
 
-	auto& nodes = graph.GetNodes();
-	for (int i = 0, n = nodes.size(); i < n; ++i)
+	for (size_t i = 0, n = graph.GetNodesNum(); i < n; ++i)
 	{
-		if (nodes[i]) 
+		auto node = graph.GetNode(i);
+		if (node) 
 		{
-			if (!nodes[i]->HasComponent<graph::NodePos>())
-			{
-				nodes[i]->AddComponent<graph::NodePos>(sm::vec2(0, 0));
+			if (!node->HasComponent<graph::NodePos>()) {
+				node->AddComponent<graph::NodePos>(sm::vec2(0, 0));
 			}
-			auto& pos = nodes[i]->GetComponent<graph::NodePos>().GetPos();
+			auto& pos = node->GetComponent<graph::NodePos>().GetPos();
 			auto v = G.newNode(i);
 			o_nodes.push_back(v);
 			GA.x(v) = pos.x * 1024;
@@ -57,16 +56,16 @@ void end(const graph::Graph& graph, const ogdf::Graph& G, const ogdf::GraphAttri
 {
 	ogdf::List<ogdf::node> ogdf_nodes;
 	G.allNodes(ogdf_nodes);
-	auto& nodes = graph.GetNodes();
 	for (ogdf::node v : ogdf_nodes)
 	{
-		if (!nodes[v->index()]) {
+		auto node = graph.GetNode(v->index());
+		if (!node) {
 			continue;
 		}
 
 		float x = GA.x(v) / 1024;
 		float y = 1.0 - GA.y(v) / 1024;
-		nodes[v->index()]->GetComponent<graph::NodePos>().SetPos({ x, y });
+		node->GetComponent<graph::NodePos>().SetPos({ x, y });
 	}
 }
 
@@ -175,7 +174,6 @@ void GraphLayout::HierarchyRanking(const Graph& graph)
 
 	begin(graph, G, GA);
 	
-	auto& nodes = graph.GetNodes();
 	ogdf::NodeArray<int> rank(G);
 	//for (int i = 0; i < nodes.size(); ++i) {
 	//	rank[i] = nodes[i]->GetRank();
@@ -183,7 +181,7 @@ void GraphLayout::HierarchyRanking(const Graph& graph)
 	int i = 0;
 	for (ogdf::node v : G.nodes)
 	{
-		rank[v] = nodes[i++]->GetComponent<NodeRank>().GetRank();
+		rank[v] = graph.GetNode(i++)->GetComponent<NodeRank>().GetRank();
 	}
 
 	ogdf::SugiyamaLayout SL;

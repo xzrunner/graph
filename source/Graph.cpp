@@ -29,8 +29,13 @@ void Graph::AddEdge(size_t f_node, size_t t_node)
 	}
 
 	m_edges.insert({ n0, n1 });
-	m_nodes[n0]->AddConnect(m_nodes[n1]);
-	m_nodes[n1]->AddConnect(m_nodes[n0]);
+	m_nodes[n0]->AddConnect(m_nodes[n1].get());
+	m_nodes[n1]->AddConnect(m_nodes[n0].get());
+}
+
+const std::shared_ptr<Node> Graph::GetNode(size_t node) const
+{
+	return node >= m_nodes.size() ? nullptr : m_nodes[node];
 }
 
 void Graph::RemoveNode(size_t node)
@@ -49,8 +54,8 @@ void Graph::RemoveEdge(size_t f_node, size_t t_node)
 	{
 		if (itr->second == t_node)
 		{
-			m_nodes[itr->first]->DelConnect(m_nodes[itr->second]);
-			m_nodes[itr->second]->DelConnect(m_nodes[itr->first]);
+			m_nodes[itr->first]->DelConnect(m_nodes[itr->second].get());
+			m_nodes[itr->second]->DelConnect(m_nodes[itr->first].get());
 
 			itr = m_edges.erase(itr);
 
@@ -66,8 +71,8 @@ void Graph::ClearEdges(size_t node)
 	auto region = m_edges.equal_range(node);
 	for (auto itr = region.first; itr != region.second; ) 
 	{
-		m_nodes[itr->first]->DelConnect(m_nodes[itr->second]);
-		m_nodes[itr->second]->DelConnect(m_nodes[itr->first]);
+		m_nodes[itr->first]->DelConnect(m_nodes[itr->second].get());
+		m_nodes[itr->second]->DelConnect(m_nodes[itr->first].get());
 
 		itr = m_edges.erase(itr);
 	}

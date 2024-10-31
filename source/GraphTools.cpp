@@ -8,11 +8,11 @@
 namespace graph
 {
 
-std::shared_ptr<Node> GraphTools::QueryNode(const Graph& graph, const sm::vec2& pos)
+const std::shared_ptr<Node> GraphTools::QueryNode(const Graph& graph, const sm::vec2& pos)
 {
-	auto& nodes = graph.GetNodes();
-	for (auto& node : nodes)
+	for (size_t i = 0, n = graph.GetNodesNum(); i < n; ++i)
 	{
+		auto node = graph.GetNode(i);
 		float dist = sm::dis_pos_to_pos(pos, node->GetComponent<NodePos>().GetPos());
 		if (dist < FLT_EPSILON)
 		{
