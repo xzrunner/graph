@@ -10,6 +10,7 @@ namespace graph
 {
 
 class Node;
+class Edge;
 
 class Graph : public objcomp::Object
 {
@@ -17,7 +18,7 @@ public:
 	Graph() {}
 
 	void AddNode(const std::shared_ptr<Node>& node);
-	void AddEdge(size_t f_node, size_t t_node);
+	std::shared_ptr<Edge> AddEdge(size_t f_node, size_t t_node);
 
 	auto& GetEdges() const { return m_edges; }
 
@@ -34,8 +35,10 @@ public:
 
 private:
 	std::vector<std::shared_ptr<Node>> m_nodes;
-	std::multimap<size_t, size_t> m_edges;
 
+	using EdgeKey = std::pair<size_t, size_t>;
+	std::map<EdgeKey, std::shared_ptr<Edge>> m_edges;
+	
 	bool m_directed = true;
 
 }; // Graph

@@ -12,7 +12,7 @@ void Graph::AddNode(const std::shared_ptr<Node>& node)
 	m_nodes.push_back(node);
 }
 
-void Graph::AddEdge(size_t f_node, size_t t_node)
+std::shared_ptr<Edge> Graph::AddEdge(size_t f_node, size_t t_node)
 {
 	assert(f_node < m_nodes.size() && t_node < m_nodes.size());
 
@@ -21,16 +21,18 @@ void Graph::AddEdge(size_t f_node, size_t t_node)
 		std::swap(n0, n1);
 	}
 
-	auto range = m_edges.equal_range(n0);
-	for (auto itr = range.first; itr != range.second; ++itr)
-	{
-		if (itr->second == n1)
-			return;
+	EdgeKey key(n0, n1);
+	auto itr = m_edges.find(key);
+	if (itr != m_edges.end()) {
+		return itr->second;
 	}
 
-	m_edges.insert({ n0, n1 });
-	m_nodes[n0]->AddConnect(m_nodes[n1].get());
-	m_nodes[n1]->AddConnect(m_nodes[n0].get());
+	auto edge = std::make_shared<Edge>(m_nodes[n0].get(), m_nodes[n1].get());
+	m_nodes[n0]->AddEdge(edge.get());
+	m_nodes[n1]->AddEdge(edge.get());
+	m_edges.insert({ key, edge });
+
+	return edge;
 }
 
 const std::shared_ptr<Node> Graph::GetNode(size_t node) const
@@ -49,33 +51,40 @@ void Graph::RemoveEdge(size_t f_node, size_t t_node)
 {
 	assert(f_node < m_nodes.size() && t_node < m_nodes.size());
 
-	auto region = m_edges.equal_range(f_node);
-	for (auto itr = region.first; itr != region.second; )
-	{
-		if (itr->second == t_node)
-		{
-			m_nodes[itr->first]->DelConnect(m_nodes[itr->second].get());
-			m_nodes[itr->second]->DelConnect(m_nodes[itr->first].get());
+	auto itr = m_edges.find({f_node, t_node});
+	if (itr == m_edges.end())
+		return;
 
-			itr = m_edges.erase(itr);
+	auto edge = itr->second;
+	const_cast<Node*>(edge->GetFromNode())->DelEdge(edge.get());
+	const_cast<Node*>(edge->GetToNode())->DelEdge(edge.get());
 
-			break;
-		}
-	}
+	m_edges.erase(itr);
 }
 
 void Graph::ClearEdges(size_t node)
 {
 	assert(node < m_nodes.size());
 
-	auto region = m_edges.equal_range(node);
-	for (auto itr = region.first; itr != region.second; ) 
+	for (auto edge : m_nodes[node]->GetEdges())
 	{
-		m_nodes[itr->first]->DelConnect(m_nodes[itr->second].get());
-		m_nodes[itr->second]->DelConnect(m_nodes[itr->first].get());
+		int node2 = -1;
+		for (int i = 0, n = m_nodes.size(); i < n; ++i)
+		{
+			if (m_nodes[i].get() == edge->GetToNode())
+			{
+				node2 = i;
+				break;
+			}
+		}
+		assert(node2 >= 0);
 
-		itr = m_edges.erase(itr);
+		auto itr = m_edges.find({node, node2});
+		assert(itr != m_edges.end());
+		m_edges.erase(itr);
 	}
+
+	m_nodes[node]->ClearEdges();
 }
 
 }

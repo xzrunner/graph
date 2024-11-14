@@ -8,6 +8,8 @@
 namespace graph
 {
 
+class Edge;
+
 class Node : public objcomp::Object
 {
 public:
@@ -20,15 +22,16 @@ public:
 	void SetValue(int val) { m_value = val; }
 	int GetValue() const { return m_value; }
 
-	void AddConnect(const Node* conn);
-	void DelConnect(const Node* conn);
-	auto& GetConnects() const { return m_conns; }
+	bool AddEdge(const Edge* edge);
+	bool DelEdge(const Edge* edge);
+	auto& GetEdges() const { return m_edges; }
+	void ClearEdges() { m_edges.clear(); }
 
 private:
 	std::string m_name;
 	int m_value = -1;
 
-	std::vector<const Node*> m_conns;
+	std::vector<const Edge*> m_edges;
 
 }; // Node
 

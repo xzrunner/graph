@@ -13,6 +13,9 @@
     <ClCompile Include="..\..\..\source\GraphTools.cpp">
       <Filter>tools</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\source\Edge.cpp">
+      <Filter>obj</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\graph\Edge.h">

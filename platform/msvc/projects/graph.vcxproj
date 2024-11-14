@@ -29,6 +29,7 @@
     <ClInclude Include="..\..\..\include\graph\NodeRank.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\source\Edge.cpp" />
     <ClCompile Include="..\..\..\source\Graph.cpp" />
     <ClCompile Include="..\..\..\source\GraphLayout.cpp" />
     <ClCompile Include="..\..\..\source\GraphTools.cpp" />

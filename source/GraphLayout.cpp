@@ -3,6 +3,7 @@
 #include "graph/Node.h"
 #include "graph/NodeRank.h"
 #include "graph/NodePos.h"
+#include "graph/Edge.h"
 
 #include <ogdf/basic/GraphAttributes.h>
 #include <ogdf/basic/Logger.h>
@@ -16,6 +17,8 @@
 #include <ogdf/layered/MedianHeuristic.h>
 #include <ogdf/layered/OptimalHierarchyLayout.h>
 #include <ogdf/layered/OptimalRanking.h>
+
+#include <assert.h>
 
 namespace
 {
@@ -44,11 +47,12 @@ void begin(const graph::Graph& graph, ogdf::Graph& G, ogdf::GraphAttributes& GA)
 			o_nodes.push_back(v);
 		}
 	}
-
+	
 	auto& edges = graph.GetEdges();
 	for (auto& edge : edges)
 	{
-		G.newEdge(o_nodes[edge.first], o_nodes[edge.second]);
+		auto& key = edge.first;
+		G.newEdge(o_nodes[key.first], o_nodes[key.second]);
 	}
 }
 

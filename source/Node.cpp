@@ -3,20 +3,31 @@
 namespace graph
 {
 
-void Node::AddConnect(const Node* conn)
+bool Node::AddEdge(const Edge* edge)
 {
-	m_conns.push_back(conn);
+	for (auto e : m_edges)
+	{
+		if (e == edge)
+			return false;
+	}
+
+	m_edges.push_back(edge);
+
+	return true;
 }
 
-void Node::DelConnect(const Node* conn)
+bool Node::DelEdge(const Edge* edge)
 {
-	for (auto itr = m_conns.begin(); itr != m_conns.end(); )
+	for (auto itr = m_edges.begin(); itr != m_edges.end(); ++itr)
 	{
-		if (*itr == conn)
-			itr = m_conns.erase(itr);
-		else
-			++itr;
+		if (*itr == edge)
+		{
+			m_edges.erase(itr);
+			return true;
+		}
 	}
+
+	return false;
 }
 
 }

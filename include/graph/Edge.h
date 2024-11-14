@@ -3,14 +3,20 @@
 namespace graph
 {
 
+class Node;
+
 class Edge
 {
 public:
-	Edge(size_t node1, size_t node2)
-		: m_node1(node1), m_node2(node2) {}
+	Edge(const Node* from, const Node* to)
+		: m_from(from), m_to(to) {}
+
+	auto GetFromNode() const { return m_from; }
+	auto GetToNode() const { return m_to; }
 
 private:
-	size_t m_node1, m_node2;
+	const Node* m_from = nullptr;
+	const Node* m_to = nullptr;
 
 }; // Edge
 
