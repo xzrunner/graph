@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\graph\Edge.h" />
+    <ClInclude Include="..\..\..\include\graph\EdgeStyle.h" />
     <ClInclude Include="..\..\..\include\graph\Graph.h" />
     <ClInclude Include="..\..\..\include\graph\GraphLayout.h" />
     <ClInclude Include="..\..\..\include\graph\GraphTools.h" />

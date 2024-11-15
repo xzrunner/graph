@@ -1,13 +1,16 @@
 #pragma once
 
+#include <objcomp/Object.h>
+
 namespace graph
 {
 
 class Node;
 
-class Edge
+class Edge : public objcomp::Object
 {
 public:
+	Edge() {}
 	Edge(const Node* from, const Node* to)
 		: m_from(from), m_to(to) {}
 
