@@ -41,12 +41,8 @@ set(ALL_FILES
 # Target
 ################################################################################
 
-include_directories(${CMAKE_SOURCE_DIR}/include)
-include_directories(${CMAKE_SOURCE_DIR}/external/objcomp/include)
-include_directories(${CMAKE_SOURCE_DIR}/external/sm)
-include_directories(${CMAKE_SOURCE_DIR}/external/guard/include)
-include_directories(${CMAKE_SOURCE_DIR}/external/ogdf/include)
-
 set(CMAKE_CXX_STANDARD 17)
 
 add_library(${PROJECT_NAME} STATIC ${ALL_FILES})
+
+target_include_directories(${PROJECT_NAME} PRIVATE include external/objcomp/include external/sm external/guard/include external/ogdf/include)
