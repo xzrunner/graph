@@ -50,7 +50,6 @@ void Graph::RemoveNode(size_t node)
 void Graph::RemoveEdge(size_t f_node, size_t t_node)
 {
 	assert(f_node < m_nodes.size() && t_node < m_nodes.size());
-
 	auto itr = m_edges.find({f_node, t_node});
 	if (itr == m_edges.end())
 		return;
@@ -68,18 +67,7 @@ void Graph::ClearEdges(size_t node)
 
 	for (auto edge : m_nodes[node]->GetEdges())
 	{
-		int node2 = -1;
-		for (int i = 0, n = m_nodes.size(); i < n; ++i)
-		{
-			if (m_nodes[i].get() == edge->GetToNode())
-			{
-				node2 = i;
-				break;
-			}
-		}
-		assert(node2 >= 0);
-
-		auto itr = m_edges.find({node, node2});
+		auto itr = m_edges.find({ edge->GetFromNode()->GetValue(), edge->GetToNode()->GetValue()});
 		assert(itr != m_edges.end());
 		m_edges.erase(itr);
 	}
